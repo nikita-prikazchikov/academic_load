@@ -1,0 +1,21 @@
+.modal.top.fade.in,
+.modal.top {
+    top: 42px;
+    margin-top: 0;
+}
+.modal.mini {
+    width: 400px;
+    margin-left: -200px;
+}
+.modal.big {
+    width: 960px;
+    margin-left: -480px;
+}
+.modal.huge {
+    left: 5%;
+    width: 90%;
+    margin-left: 0;
+}
+.modal.long .modal-body{
+    max-height: 100%;
+}
