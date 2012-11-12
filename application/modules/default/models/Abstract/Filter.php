@@ -66,7 +66,7 @@ class Model_Abstract_Filter {
 	// ===============================================================================================================================================
 
     public function getSemesterAll () {
-        return array( "Оба" => "" ) + $this->getSemester();
+        return array( "" => "Оба" ) + $this->getSemester();
     }
 
 	public function getSemester () {

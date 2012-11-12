@@ -1,6 +1,15 @@
 var generic = {};
-generic.getYearId = function (){return $("#yearId").val();};
-generic.getSemester = function (){return $("#semester").val();};
+generic.getYearId = function () {
+    return $("#yearId").val();
+};
+generic.getSemester = function () {
+    return $("#semester").val();
+};
+
+var header = {};
+header.init = function (){
+    $(".btn-show-dialog-period-change").click(period.dialog.show);
+};
 
 var utils = {};
 utils.buildURL = function (controller, action, strEnd) {
@@ -128,23 +137,25 @@ dialog.enableSubmit = function () {
 dialog.close = function () {
     $("#modal").modal('hide');
 };
-dialog.get = function (){return $("#dialog");};
+dialog.get = function () {
+    return $("#modal");
+};
 
 var period = {};
 period.dialog = {};
-period.dialog.init = function (){
-    dialog.get().find(".btn-submit").click(period.dialog.submit);
+period.dialog.init = function () {
+    dialog.get().find(".btn-period-submit").click(period.dialog.submit);
 };
-period.dialog.show = function (){
-    dialog.display( utils.buildURL( "index", "dialog" ) );
+period.dialog.show = function () {
+    dialog.display(utils.buildURL("index", "perioddialog"));
 };
-period.dialog.submit = function (){
+period.dialog.submit = function () {
     var semester = period.dialog.getSemester();
-    document.href= utils.buildURL( "index", "index", "idYear=" + period.dialog.getYearId() + ( semester ? "&semester=" + semester : "") );
+    location.href = utils.buildURL("index", "index", "id_year=" + period.dialog.getYearId() + ( semester ? "&semester=" + semester : ""));
 };
-period.dialog.getYearId = function (){
+period.dialog.getYearId = function () {
     return dialog.get().find("select[name='year']").val();
 };
-period.dialog.getSemester = function (){
+period.dialog.getSemester = function () {
     return dialog.get().find("select[name='semester']").val();
 };

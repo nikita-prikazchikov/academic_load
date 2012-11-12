@@ -34,8 +34,11 @@ class Model_Year_List extends Model_Abstract_List {
 		return parent::getList();
 	}
 
-
-	public function getListView (){
+    /**
+     * Function to get list of years prepared for display in view
+     * @return array
+     */
+    public function getListView (){
 		if ( is_null( $this->_yearViewList )){
         $list = $this->getList();
         $this->_yearViewList = array ();

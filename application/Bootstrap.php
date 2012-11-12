@@ -42,12 +42,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		$view->doctype( 'HTML5' );
 
-
-		$this->view->headLink()->appendStylesheet( '/jquery/css/redmond/jquery-ui-1.8.16.custom.css' );
-
-		$this->view->headScript()->appendFile( '/jquery/js/jquery-1.7.2.min.js' );
-		$this->view->headScript()->appendFile( '/jquery/js/jquery-ui-1.8.16.custom.min.js' );
-
+		$this->view->headScript()->appendFile( '/jquery/js/jquery-1.8.2.min.js' );
 
 		$this->view->headLink()->appendStylesheet( '/twitter_bootstrap/css/bootstrap.css' );
 		$this->view->headLink()->appendStylesheet( '/twitter_bootstrap/css/bootstrap-responsive.css' );

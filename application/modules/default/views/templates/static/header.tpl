@@ -46,12 +46,14 @@
 
                 <li>
                     <a class="brand" href="#">
-                    {if isset($semester) && !empty($semester)}Семестр {$semester}{/if}
-                    {if isset($yearName)}Год {$yearName}{/if}
+                    {if isset($yearName)}Учебный год {$yearName}{/if}
+                    {if isset($semester) && !empty($semester)} :: Семестр {$semester}{/if}
                     </a>
                 </li>
-                <li class="btn">Изменить период</li>
+                <li class="btn btn-show-dialog-period-change">Изменить период</li>
             </ul>
         </div>
     </div>
 </div>
+<script type="text/javascript">header.init();</script>
+
