@@ -36,9 +36,6 @@
                         <a href="{$this->url(['controller' => 'year', 'action' => 'view'])}">
                             <i class="icon-th-large"></i> Годы
                         </a>
-                        <a href="{$this->url(['controller' => 'user', 'action' => 'view'])}">
-                            <i class="icon-th-large"></i> Годы
-                        </a>
                     </ul>
                 </li>
 

@@ -5,6 +5,12 @@ generic.getYearId = function () {
 generic.getSemester = function () {
     return $("#semester").val();
 };
+generic.getContainer = function (){
+    return $("#container");
+};
+generic.loadInContainer = function ( url ){
+  generic.getContainer().html("").load(url);
+};
 
 var header = {};
 header.init = function (){
@@ -12,12 +18,21 @@ header.init = function (){
 };
 
 var utils = {};
-utils.buildURL = function (controller, action, strEnd) {
-    strEnd = strEnd || '';
+utils.buildURL = function (controller, action, parameters) {
+    var strEnd = '';
+    if ( parameters !== undefined ){
+        var iteration = 0;
+        for( var key in parameters ){
+            if ( iteration ){
+                strEnd += "&";
+            }
+            strEnd += key + "=" + parameters[key];
+        }
+    }
     var loc = document.location;
     var url = loc.protocol + '//' + loc.host + '/' + controller + ( action != undefined && action.length > 0 ? '/' + action : '');
     return url + "?" + strEnd;
-}
+};
 utils.array2json = function (arr) {
     var parts = [];
     var is_list = (Object.prototype.toString.apply(arr) === '[object Array]');
@@ -99,7 +114,7 @@ utils.displayError = function (text, title) {
                 }
             }
         });
-}
+};
 utils.displayConfirm = function (text, title, callback) {
     title = title || "Error";
     $("#dialog-message")
@@ -136,7 +151,7 @@ dialog.enableSubmit = function () {
 };
 dialog.close = function () {
     $("#modal").modal('hide');
-};
+};{}
 dialog.get = function () {
     return $("#modal");
 };
@@ -151,11 +166,27 @@ period.dialog.show = function () {
 };
 period.dialog.submit = function () {
     var semester = period.dialog.getSemester();
-    location.href = utils.buildURL("index", "index", "id_year=" + period.dialog.getYearId() + ( semester ? "&semester=" + semester : ""));
+    var parameters = {};
+    parameters.id_year = period.dialog.getYearId();
+    if ( semester ){
+        parameters.semester = semester;
+    }
+    location.href = utils.buildURL("index", "index", parameters );
 };
 period.dialog.getYearId = function () {
     return dialog.get().find("select[name='year']").val();
 };
 period.dialog.getSemester = function () {
     return dialog.get().find("select[name='semester']").val();
+};
+
+var pages = {
+    year : {}
+};
+
+pages.year.init = function (){
+
+};
+pages.year.load = function ( yearId ){
+    generic.loadInContainer(ulils.buildURL("year", "list", {id_year:yearId}))
 };

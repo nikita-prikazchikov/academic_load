@@ -7,7 +7,7 @@
 </head>
 <body>
 {include file="header.tpl"}
-<div class="container-fluid">
+<div id="container" class="container-fluid">
     {$this->layout()->content}
 </div>
 <div id="modal" class="modal hide fade in"></div>
