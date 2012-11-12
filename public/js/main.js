@@ -181,12 +181,13 @@ period.dialog.getSemester = function () {
 };
 
 var pages = {
-    year : {}
+    year : {list:{}}
 };
 
 pages.year.init = function (){
 
 };
 pages.year.load = function ( yearId ){
-    generic.loadInContainer(ulils.buildURL("year", "list", {id_year:yearId}))
+    generic.loadInContainer(utils.buildURL("year", "index", {id_year:yearId}))
 };
+pages.year.list.init = function (){};

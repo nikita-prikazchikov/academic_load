@@ -27,13 +27,13 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <a href="{$this->url(['controller' => 'speciality', 'action' => 'view'])}">
+                        <a href="{$this->url(['controller' => 'speciality', 'action' => 'index'])}">
                             <i class="icon-th-large"></i> Специальности
                         </a>
-                        <a href="{$this->url(['controller' => 'group', 'action' => 'view'])}">
+                        <a href="{$this->url(['controller' => 'group', 'action' => 'index'])}">
                             <i class="icon-th-large"></i> Группы
                         </a>
-                        <a href="{$this->url(['controller' => 'year', 'action' => 'view'])}">
+                        <a id="link-user-list" href="{$this->url(['controller' => 'year', 'action' => 'index'])}">
                             <i class="icon-th-large"></i> Годы
                         </a>
                     </ul>
