@@ -5,25 +5,25 @@ generic.getYearId = function () {
 generic.getSemester = function () {
     return $("#semester").val();
 };
-generic.getContainer = function (){
+generic.getContainer = function () {
     return $("#container");
 };
-generic.loadInContainer = function ( url ){
-  generic.getContainer().html("").load(url);
+generic.loadInContainer = function (url) {
+    generic.getContainer().html("").load(url);
 };
 
 var header = {};
-header.init = function (){
+header.init = function () {
     $(".btn-show-dialog-period-change").click(period.dialog.show);
 };
 
 var utils = {};
 utils.buildURL = function (controller, action, parameters) {
     var strEnd = '';
-    if ( parameters !== undefined ){
+    if (parameters !== undefined) {
         var iteration = 0;
-        for( var key in parameters ){
-            if ( iteration ){
+        for (var key in parameters) {
+            if (iteration) {
                 strEnd += "&";
             }
             strEnd += key + "=" + parameters[key];
@@ -151,7 +151,9 @@ dialog.enableSubmit = function () {
 };
 dialog.close = function () {
     $("#modal").modal('hide');
-};{}
+};
+{
+}
 dialog.get = function () {
     return $("#modal");
 };
@@ -168,10 +170,10 @@ period.dialog.submit = function () {
     var semester = period.dialog.getSemester();
     var parameters = {};
     parameters.id_year = period.dialog.getYearId();
-    if ( semester ){
+    if (semester) {
         parameters.semester = semester;
     }
-    location.href = utils.buildURL("index", "index", parameters );
+    location.href = utils.buildURL("index", "index", parameters);
 };
 period.dialog.getYearId = function () {
     return dialog.get().find("select[name='year']").val();
@@ -181,13 +183,54 @@ period.dialog.getSemester = function () {
 };
 
 var pages = {
-    year : {list:{}}
+    year:{list:{}},
+    speciality:{dialog:{}, list:{}, view:{}}
 };
 
-pages.year.init = function (){
+pages.year.init = function () {
 
 };
-pages.year.load = function ( yearId ){
+pages.year.load = function (yearId) {
     generic.loadInContainer(utils.buildURL("year", "index", {id_year:yearId}))
 };
-pages.year.list.init = function (){};
+pages.year.list.init = function () {
+};
+
+pages.speciality.dialog.init = function () {
+    $(".btn-speciality-submit").click(pages.speciality.dialog.submit);
+};
+pages.speciality.dialog.show = function (specialityId) {
+    dialog.display(utils.buildURL("speciality", "dialog", {id_speciality:specialityId}));
+};
+pages.speciality.dialog.submit = function () {
+    $.post(utils.buildURL( "speciality", "edit"),
+        {
+            id_speciality:$("#edit-speciality-id").val(),
+            name:$("#edit-speciality-name").val(),
+            type:$("#edit-speciality-type").val()
+        },
+        function (data) {
+            if (data.success) {
+                dialog.close();
+                pages.speciality.list.load();
+            }
+            else {
+                $("#modal_alert").html(data.message).show();
+            }
+        },
+        'json'
+    );
+};
+pages.speciality.list.init = function () {
+};
+pages.speciality.list.load = function () {
+    $(".speciality-list-container").load(utils.buildURL("speciality", "list"));
+};
+pages.speciality.view.init = function () {
+    $(".btn-add-speciality").click(function () {
+        pages.speciality.dialog.show(0)
+    });
+    $(".btn-edit-speciality").click(function () {
+        pages.speciality.dialog.show($(this).data("id"))
+    });
+};

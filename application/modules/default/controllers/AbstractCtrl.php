@@ -7,16 +7,16 @@ class AbstractCtrl extends Zend_Controller_Action {
 
     const PAGE_TITLE = "";
 
-    protected function setPageTitle($value){
+    protected function setPageTitle ( $value ) {
         $this->view->headTitle( $value );
     }
 
-	/**
-	 * @return Model_Acl
-	 */
-	protected function getAcl(){
-		return $this->_acl;
-	}
+    /**
+     * @return Model_Acl
+     */
+    protected function getAcl () {
+        return $this->_acl;
+    }
 
     public function init () {
 
@@ -27,21 +27,20 @@ class AbstractCtrl extends Zend_Controller_Action {
 //      Zend_Db_Table::getDefaultAdapter()->setProfiler($profiler);
     }
 
-    public function indexAction()
-    {
+    public function indexAction () {
         Zend_Layout::getMvcInstance()->setLayout( 'layout' );
 
         $yearId = $this->getRequestIdYear();
         $semester = $this->getRequestSemester();
 
-        if ( $semester ){
+        if ( $semester ) {
             $this->view->assign( "semester", $semester );
         }
         else {
             $this->view->assign( "semester", "" );
         }
 
-        if ( $yearId ){
+        if ( $yearId ) {
             $yearId = 1;
             $mapper = Model_DB_Year_Mapper::get_instance();
             $yearName = $mapper->getName( $yearId );
@@ -55,24 +54,32 @@ class AbstractCtrl extends Zend_Controller_Action {
 
     //================================================================================================================================================
 
-	protected function getRequestId(){
-		return $this->getRequest()->getParam('id');
-	}
-
-
-	protected function getRequestIdUser(){
-		return $this->getRequest()->getParam('id_user');
-	}
-
-	protected function getRequestName(){
-		return $this->getRequest()->getParam('name');
-	}
-
-    protected function getRequestIdYear(){
-        return $this->getRequest()->getParam('id_year');
+    protected function getRequestId () {
+        return $this->getRequest()->getParam( 'id' );
     }
 
-    protected function getRequestSemester(){
-        return $this->getRequest()->getParam('semester');
+
+    protected function getRequestIdUser () {
+        return $this->getRequest()->getParam( 'id_user' );
+    }
+
+    protected function getRequestName () {
+        return $this->getRequest()->getParam( 'name' );
+    }
+
+    protected function getRequestIdYear () {
+        return $this->getRequest()->getParam( 'id_year' );
+    }
+
+    protected function getRequestIdSpeciality () {
+        return $this->getRequest()->getParam( 'id_speciality' );
+    }
+
+    protected function getRequestSemester () {
+        return $this->getRequest()->getParam( 'semester' );
+    }
+
+    protected function getRequestType () {
+        return $this->getRequest()->getParam( 'type' );
     }
 }

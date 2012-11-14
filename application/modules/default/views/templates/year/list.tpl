@@ -14,7 +14,7 @@
         <td></td>
     </tr>
     {foreachelse}
-    <div class="alert alert-info">There is no years</div>
+    <div class="alert alert-info">Нет активных учебных годовдля отображения</div>
     {/foreach}
     </tbody>
 </table>

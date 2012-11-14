@@ -4,6 +4,7 @@ class Model_Abstract_Filter {
 
 	protected $_id;
 	protected $_idApplication;
+	protected $_idSpeciality;
 	protected $_id_user;
 	protected $_start_date;
 	protected $_end_date;
@@ -36,6 +37,9 @@ class Model_Abstract_Filter {
 			}
 			if ( isset( $o[ "id_application" ] ) ) {
 				$this->setIdApplication( $o[ "id_application" ] );
+			}
+			if ( isset( $o[ "id_speciality" ] ) ) {
+				$this->setIdSpeciality( $o[ "id_speciality" ] );
 			}
 			if ( isset( $o[ "id_user" ] ) ) {
 				$this->setIdUser( $o[ "id_user" ] );
@@ -133,6 +137,15 @@ class Model_Abstract_Filter {
 	public function getIdUser () {
 		return $this->_id_user;
 	}
+
+    public function setIdSpeciality ( $idSpeciality ) {
+        $this->_idSpeciality = $idSpeciality;
+    }
+
+    public function getIdSpeciality () {
+        return $this->_idSpeciality;
+    }
+
 
 	public function setLimit ( $limit ) {
 		$limit = $limit < 1 ? 1 : $limit;

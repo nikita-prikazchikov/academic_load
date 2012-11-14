@@ -1,0 +1,1 @@
+{include "../speciality/view.tpl"}

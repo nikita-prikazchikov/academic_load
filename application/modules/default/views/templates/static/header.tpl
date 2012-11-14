@@ -30,9 +30,6 @@
                         <a href="{$this->url(['controller' => 'speciality', 'action' => 'index'])}">
                             <i class="icon-th-large"></i> Специальности
                         </a>
-                        <a href="{$this->url(['controller' => 'group', 'action' => 'index'])}">
-                            <i class="icon-th-large"></i> Группы
-                        </a>
                         <a id="link-user-list" href="{$this->url(['controller' => 'year', 'action' => 'index'])}">
                             <i class="icon-th-large"></i> Годы
                         </a>
