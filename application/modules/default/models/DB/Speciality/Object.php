@@ -31,6 +31,19 @@ class Model_DB_Speciality_Object extends Model_Abstract_DBObject {
         return $this->_type;
     }
 
+    public function getTypeCaption(){
+        switch ( $this->getType() ){
+            case Model_DB_Speciality_Table::TYPE_DIARY:
+                return "Дневники";
+            case Model_DB_Speciality_Table::TYPE_EXTRAMURAL:
+                return "Заочники";
+            case Model_DB_Speciality_Table::TYPE_EVENING:
+                return "Вечерники";
+            default:
+                return "";
+        }
+    }
+
     public function setName ( $name ) {
         $this->_name = $name;
         return $this;

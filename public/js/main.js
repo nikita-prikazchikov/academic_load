@@ -23,7 +23,7 @@ utils.buildURL = function (controller, action, parameters) {
     if (parameters !== undefined) {
         var iteration = 0;
         for (var key in parameters) {
-            if (iteration) {
+            if (iteration++) {
                 strEnd += "&";
             }
             strEnd += key + "=" + parameters[key];
@@ -183,17 +183,35 @@ period.dialog.getSemester = function () {
 };
 
 var pages = {
-    year:{list:{}},
-    speciality:{dialog:{}, list:{}, view:{}}
+    group:{dialog:{}},
+    speciality:{dialog:{}, list:{}, view:{}},
+    year:{list:{}}
 };
 
-pages.year.init = function () {
-
+pages.group.dialog.init = function () {
+    $(".btn-group-submit").click(pages.group.dialog.submit);
 };
-pages.year.load = function (yearId) {
-    generic.loadInContainer(utils.buildURL("year", "index", {id_year:yearId}))
+pages.group.dialog.show = function (groupId, specialityId) {
+    dialog.display(utils.buildURL("group", "dialog", {id_group:groupId, id_speciality:specialityId}));
 };
-pages.year.list.init = function () {
+pages.group.dialog.submit = function () {
+    $.post(utils.buildURL("group", "edit"),
+        {
+            id_group:$("#edit-group-id").val(),
+            id_speciality:$("#edit-speciality-id").val(),
+            name:$("#edit-group-name").val()
+        },
+        function (data) {
+            if (data.success) {
+                dialog.close();
+                pages.speciality.list.load();
+            }
+            else {
+                $("#modal_alert").html(data.message).show();
+            }
+        },
+        'json'
+    );
 };
 
 pages.speciality.dialog.init = function () {
@@ -203,7 +221,7 @@ pages.speciality.dialog.show = function (specialityId) {
     dialog.display(utils.buildURL("speciality", "dialog", {id_speciality:specialityId}));
 };
 pages.speciality.dialog.submit = function () {
-    $.post(utils.buildURL( "speciality", "edit"),
+    $.post(utils.buildURL("speciality", "edit"),
         {
             id_speciality:$("#edit-speciality-id").val(),
             name:$("#edit-speciality-name").val(),
@@ -222,15 +240,29 @@ pages.speciality.dialog.submit = function () {
     );
 };
 pages.speciality.list.init = function () {
+    $(".btn-group-add").click(function () {
+        pages.group.dialog.show(0, $(this).data("specialityId"))
+    });
+    $(".btn-group-edit").click(function () {
+        pages.group.dialog.show($(this).data("id"), $(this).data("specialityId"))
+    });
+    $(".btn-speciality-add").click(function () {
+        pages.speciality.dialog.show(0)
+    });
+    $(".btn-speciality-edit").click(function () {
+        pages.speciality.dialog.show($(this).data("id"))
+    });
 };
 pages.speciality.list.load = function () {
     $(".speciality-list-container").load(utils.buildURL("speciality", "list"));
 };
-pages.speciality.view.init = function () {
-    $(".btn-add-speciality").click(function () {
-        pages.speciality.dialog.show(0)
-    });
-    $(".btn-edit-speciality").click(function () {
-        pages.speciality.dialog.show($(this).data("id"))
-    });
+pages.speciality.view.init = function () {};
+
+pages.year.init = function () {
+
+};
+pages.year.load = function (yearId) {
+    generic.loadInContainer(utils.buildURL("year", "index", {id_year:yearId}))
+};
+pages.year.list.init = function () {
 };

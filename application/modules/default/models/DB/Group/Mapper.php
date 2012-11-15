@@ -35,7 +35,9 @@ class Model_DB_Group_Mapper extends Model_Abstract_DBMapper {
     public function findByFilter ( Model_Group_Filter $filter ) {
 
         $where = $this->getWhereClauseByFilter( $filter );
-        $order = null;
+        $order = array(
+            Model_DB_Group_Table::FIELDS_NAME
+        );
         return $this->fetchAll( $where, $order, $filter->getLimit(), $filter->getOffset() );
     }
 

@@ -22,7 +22,7 @@ class Model_DB_Speciality_Mapper extends Model_Abstract_DBMapper{
     }
 
     public function __construct (){
-        parent::__construct( 'Model_DB_Group_Object', 'Model_DB_Speciality_Table' );
+        parent::__construct( 'Model_DB_Speciality_Object', 'Model_DB_Speciality_Table' );
     }
 
     /**
