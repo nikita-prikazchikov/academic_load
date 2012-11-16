@@ -1,0 +1,1 @@
+{include "../user/view.tpl"}

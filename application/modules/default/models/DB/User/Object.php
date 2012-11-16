@@ -14,6 +14,10 @@ class Model_DB_User_Object extends Model_Abstract_DBObject{
         );
     }
 
+    public function save (){
+        Model_DB_User_Mapper::get_instance()->save( $this );
+    }
+
     public function setName ( $name ){
         $this->_name = $name;
         return $this;

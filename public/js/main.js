@@ -186,6 +186,7 @@ var pages = {
     discipline:{dialog:{}, list:{}, view:{}},
     group:{dialog:{}},
     speciality:{dialog:{}, list:{}, view:{}},
+    user:{dialog:{}, list:{}, view:{}},
     year:{list:{}}
 };
 
@@ -295,6 +296,43 @@ pages.speciality.list.load = function () {
     $(".speciality-list-container").load(utils.buildURL("speciality", "list"));
 };
 pages.speciality.view.init = function () {};
+
+pages.user.dialog.init = function () {
+    $(".btn-user-submit").click(pages.user.dialog.submit);
+};
+pages.user.dialog.show = function (userId) {
+    dialog.display(utils.buildURL("user", "dialog", {id_user:userId}));
+};
+pages.user.dialog.submit = function () {
+    $.post(utils.buildURL("user", "edit"),
+        {
+            id_user:$("#edit-user-id").val(),
+            name:$("#edit-user-name").val()
+        },
+        function (data) {
+            if (data.success) {
+                dialog.close();
+                pages.user.list.load();
+            }
+            else {
+                $("#modal_alert").html(data.message).show();
+            }
+        },
+        'json'
+    );
+};
+pages.user.list.init = function () {
+    $(".btn-user-add").click(function () {
+        pages.user.dialog.show(0)
+    });
+    $(".btn-user-edit").click(function () {
+        pages.user.dialog.show($(this).data("id"))
+    });
+};
+pages.user.list.load = function () {
+    $(".user-list-container").load(utils.buildURL("user", "list"));
+};
+pages.user.view.init = function () {};
 
 pages.year.init = function () {
 
