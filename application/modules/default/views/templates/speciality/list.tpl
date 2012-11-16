@@ -1,9 +1,9 @@
 {strip}
-<table class="table table-bordered table-striped table-hover table-condensed table-centered">
+<table class="table table-bordered table-striped table-hover table-condensed table-centered table-hover-controls">
     <thead>
     <tr class="">
-        <th colspan="2" class="">Специальность</th>
-        <th colspan="2" class="">Группа</th>
+        <th class="">Специальность</th>
+        <th class="">Группа</th>
     </tr>
     </thead>
     <tbody>
@@ -17,11 +17,9 @@
                 {assign var=currentType value=$speciality->getType()}
             {/if}
         <tr>
-            <td {if count( $groupList ) > 0 }rowspan="{count( $groupList)}"{/if} class="span4">
+            <td {if count( $groupList ) > 0 }rowspan="{count( $groupList)}"{/if} class="span6">
                 {$speciality->getName()}
-            </td>
-            <td {if count( $groupList ) > 0 }rowspan="{count( $groupList)}"{/if} class="span2">
-                <div class="btn-toolbar">
+                <div class="btn-toolbar pull-right hover">
                     <div class="btn-group">
                         <div class="btn btn-mini btn-speciality-edit" title="Редактировать специальность"
                              data-id="{$speciality->getId()}"><i class="icon-pencil"></i></div>
@@ -33,9 +31,8 @@
                 </div>
             </td>
             {foreach from=$groupList item=group}
-                <td class="span5">{$group->getName()}</td>
-                <td class="span1">
-                    <div class="btn btn-mini btn-group-edit" title="Редактировать группу "
+                <td class="span6">{$group->getName()}
+                    <div class="btn btn-mini btn-group-edit hover pull-right" title="Редактировать группу "
                          data-id="{$group->getId()}"
                          data-speciality-id="{$speciality->getId()}">
                         <i class="icon-pencil"></i></div>

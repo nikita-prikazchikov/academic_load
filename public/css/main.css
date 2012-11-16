@@ -35,3 +35,10 @@
 .em {
   font-style: italic;
 }
+
+.table-hover-controls .hover{
+    display: none;
+}
+.table-hover-controls tr:hover .hover{
+    display: inline-block;
+}
