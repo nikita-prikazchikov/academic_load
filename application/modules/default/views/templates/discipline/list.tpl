@@ -1,7 +1,6 @@
 <table class="table table-bordered table-striped table-condensed">
     <thead>
     <tr class="">
-        <th class="">Id</th>
         <th class="">Имя</th>
         <th class="">Действия</th>
     </tr>
@@ -9,7 +8,6 @@
     <tbody>
     {foreach from=$disciplineList->getList() item=discipline}
     <tr>
-        <td>{$discipline->getId()}</td>
         <td>{$discipline->getName()}</td>
         <td>
             <div class="btn btn-mini btn-discipline-edit" data-id="{$discipline->getId()}">
