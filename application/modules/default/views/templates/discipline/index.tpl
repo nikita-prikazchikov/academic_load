@@ -1,0 +1,1 @@
+{include "../discipline/view.tpl"}

@@ -183,10 +183,48 @@ period.dialog.getSemester = function () {
 };
 
 var pages = {
+    discipline:{dialog:{}, list:{}, view:{}},
     group:{dialog:{}},
     speciality:{dialog:{}, list:{}, view:{}},
     year:{list:{}}
 };
+
+pages.discipline.dialog.init = function () {
+    $(".btn-discipline-submit").click(pages.discipline.dialog.submit);
+};
+pages.discipline.dialog.show = function (disciplineId) {
+    dialog.display(utils.buildURL("discipline", "dialog", {id_discipline:disciplineId}));
+};
+pages.discipline.dialog.submit = function () {
+    $.post(utils.buildURL("discipline", "edit"),
+        {
+            id_discipline:$("#edit-discipline-id").val(),
+            name:$("#edit-discipline-name").val()
+        },
+        function (data) {
+            if (data.success) {
+                dialog.close();
+                pages.discipline.list.load();
+            }
+            else {
+                $("#modal_alert").html(data.message).show();
+            }
+        },
+        'json'
+    );
+};
+pages.discipline.list.init = function () {
+    $(".btn-discipline-add").click(function () {
+        pages.discipline.dialog.show(0)
+    });
+    $(".btn-discipline-edit").click(function () {
+        pages.discipline.dialog.show($(this).data("id"))
+    });
+};
+pages.discipline.list.load = function () {
+    $(".discipline-list-container").load(utils.buildURL("discipline", "list"));
+};
+pages.discipline.view.init = function () {};
 
 pages.group.dialog.init = function () {
     $(".btn-group-submit").click(pages.group.dialog.submit);

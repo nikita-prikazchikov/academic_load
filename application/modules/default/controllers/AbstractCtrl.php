@@ -58,6 +58,10 @@ class AbstractCtrl extends Zend_Controller_Action {
         return $this->getRequest()->getParam( 'id' );
     }
 
+    protected function getRequestIdDiscipline () {
+        return $this->getRequest()->getParam( 'id_discipline' );
+    }
+
     protected function getRequestIdGroup () {
         return $this->getRequest()->getParam( 'id_group' );
     }
