@@ -6,6 +6,7 @@ class Model_Abstract_Filter {
 	protected $_idApplication;
 	protected $_idSpeciality;
 	protected $_id_user;
+	protected $_id_year;
 	protected $_start_date;
 	protected $_end_date;
 	protected $_type;
@@ -44,6 +45,9 @@ class Model_Abstract_Filter {
 			if ( isset( $o[ "id_user" ] ) ) {
 				$this->setIdUser( $o[ "id_user" ] );
 			}
+			if ( isset( $o[ "id_year" ] ) ) {
+				$this->setIdYear( $o[ "id_year" ] );
+			}
 			if ( isset( $o[ "limit" ] ) ) {
 				$this->setLimit( $o[ "limit" ] );
 			}
@@ -79,6 +83,20 @@ class Model_Abstract_Filter {
 			"II" => "II"
 		);
 	}
+
+    public function getRateList(){
+        return array(
+            "0" => "Нет",
+            "0.25" => "0.25",
+            "0.5" => "0.5",
+            "0.75" => "0.75",
+            "1" => "1",
+            "1.25" => "1.25",
+            "1.5" => "1.5",
+            "1.75" => "1.75",
+            "2" => "2",
+        );
+    }
 
 	public function getUsers () {
 		$mapper = Model_DBMapper_UserMapper::get_instance();
@@ -145,6 +163,16 @@ class Model_Abstract_Filter {
     public function getIdSpeciality () {
         return $this->_idSpeciality;
     }
+
+    public function setIdYear ( $id_year ) {
+        $this->_id_year = $id_year;
+    }
+
+    public function getIdYear () {
+        return $this->_id_year;
+    }
+
+
 
 
 	public function setLimit ( $limit ) {

@@ -185,6 +185,7 @@ period.dialog.getSemester = function () {
 var pages = {
     discipline:{dialog:{}, list:{}, view:{}},
     group:{dialog:{}},
+    rate:{list:{}, view:{}},
     speciality:{dialog:{}, list:{}, view:{}},
     user:{dialog:{}, list:{}, view:{}},
     year:{list:{}}
@@ -251,6 +252,35 @@ pages.group.dialog.submit = function () {
         },
         'json'
     );
+};
+
+pages.rate.submit = function (rateId, value) {
+    $("#view_alert").hide();
+    $.post(utils.buildURL("rate", "edit"),
+        {
+            id_rate:rateId,
+            value:value
+        },
+        function (data) {
+            if (!data.success) {
+                $("#view_alert").html(data.message).show();
+            }
+        },
+        'json'
+    );
+};
+pages.rate.list.init = function () {
+    $(".btn-user-rate-change").change(function () {
+        pages.rate.submit( $(this).data("id"), $(this).val())
+    });
+};
+pages.rate.list.load = function ( yearId ) {
+    location.href = utils.buildURL("rate", "index", {id_year:yearId});
+};
+pages.rate.view.init = function () {
+    $(".btn-user-rate-back").click( function(){
+        pages.year.load( $(this).data("yearId"))
+    } )
 };
 
 pages.speciality.dialog.init = function () {
@@ -338,7 +368,10 @@ pages.year.init = function () {
 
 };
 pages.year.load = function (yearId) {
-    generic.loadInContainer(utils.buildURL("year", "index", {id_year:yearId}))
+    location.href = utils.buildURL("year", "index", {id_year:yearId})
 };
 pages.year.list.init = function () {
+    $(".btn-year-rate-edit").click(function(){
+        pages.rate.list.load( $(this).data("id"))
+    })
 };

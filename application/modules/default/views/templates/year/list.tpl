@@ -11,7 +11,10 @@
     <tr>
         <td>{$year->getId()}</td>
         <td>{$year->getName()}</td>
-        <td></td>
+        <td>
+            <div class="btn btn-mini btn-year-rate-edit" data-id="{$year->getId()}">
+                <i class="icon-pencil"></i> Ставки</div>
+        </td>
     </tr>
     {foreachelse}
     <div class="alert alert-info">Нет активных учебных годовдля отображения</div>

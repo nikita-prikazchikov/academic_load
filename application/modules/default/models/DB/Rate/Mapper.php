@@ -32,4 +32,37 @@ class Model_DB_Rate_Mapper extends Model_Abstract_DBMapper{
     public static function get_instance (){
         return parent::get_instance();
     }
+
+    public function findByFilter( Model_Rate_Filter $filter ){
+
+   		$where = $this->getWhereClauseByFilter( $filter );
+   		$order = null;
+
+   		return $this->fetchAll( $where, $order, $filter->getLimit(), $filter->getOffset() );
+   	}
+
+   	public function getCountByFilter( Model_TestPlanFilter $filter ){
+   		return false;
+   	}
+
+   	protected function getWhereClauseByFilter ( Model_Rate_Filter $filter ){
+   		$where = "1=1 ";
+   		$and = " AND ";
+
+   		$adapter = $this->getDbTable()->getAdapter();
+   		if ( $filter->getId() ){
+   			$where = $adapter->quoteInto( Model_DB_Rate_Table::FIELDS_ID." = ?", $filter->getId() );
+   		}
+   		else {
+   			$value = $filter->getIdUser();
+   			if ( !empty( $value ) ){
+   				$where .= $and . $adapter->quoteInto( Model_DB_Rate_Table::FIELDS_ID_USER_FK." LIKE ?", "%$value%" );
+   			}
+   			$value = $filter->getIdYear();
+   			if ( !empty( $value ) ){
+   				$where .= $and . $adapter->quoteInto( Model_DB_Rate_Table::FIELDS_ID_YEAR_FK." LIKE ?", "%$value%" );
+   			}
+   		}
+   		return $where;
+   	}
 }

@@ -4,10 +4,14 @@ class Model_DB_Rate_Object extends Model_Abstract_DBObject{
 
     const CLASS_NAME = 'Model_DB_Rate_Object';
 
-    protected $_type;
     protected $_rate;
     protected $_id_year_fk;
     protected $_id_user_fk;
+
+    /** @var Model_DB_User_Object */
+    private $_user;
+    /** @var Model_DB_Year_Object */
+    private $_year;
 
     public function getAssocArray (){
 
@@ -18,6 +22,32 @@ class Model_DB_Rate_Object extends Model_Abstract_DBObject{
             Model_DB_Rate_Table::FIELDS_ID_USER_FK => $this->getIdUserFk(),
         );
     }
+
+    public function save(){
+        Model_DB_Rate_Mapper::get_instance()->save($this);
+    }
+
+    /**
+     * @return Model_Abstract_DBObject|Model_DB_User_Object|null
+     */
+    public function getUser(){
+        if ( is_null ( $this->_user ) ){
+            $this->_user = Model_DB_User_Mapper::get_instance()->find( $this->getIdUserFk() );
+        }
+        return $this->_user;
+    }
+
+    /**
+     * @return \Model_DB_Year_Object
+     */
+    public function getYear () {
+        if ( is_null ( $this->_year ) ){
+            $this->_user = Model_DB_Year_Mapper::get_instance()->find( $this->getIdYearFk() );
+        }
+        return $this->_year;
+    }
+
+
 
     public function setRate ( $rate ){
         $this->_rate = $rate;
@@ -35,15 +65,6 @@ class Model_DB_Rate_Object extends Model_Abstract_DBObject{
 
     public function getIdYearFk (){
         return $this->_id_year_fk;
-    }
-
-    public function setType ( $type ){
-        $this->_type = $type;
-        return $this;
-    }
-
-    public function getType (){
-        return $this->_type;
     }
 
     public function setIdUserFk ( $id_user_fk ){

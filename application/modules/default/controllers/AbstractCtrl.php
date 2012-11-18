@@ -66,6 +66,10 @@ class AbstractCtrl extends Zend_Controller_Action {
         return $this->getRequest()->getParam( 'id_group' );
     }
 
+    protected function getRequestIdRate () {
+        return $this->getRequest()->getParam( 'id_rate' );
+    }
+
     protected function getRequestIdSpeciality () {
         return $this->getRequest()->getParam( 'id_speciality' );
     }
@@ -88,5 +92,9 @@ class AbstractCtrl extends Zend_Controller_Action {
 
     protected function getRequestType () {
         return $this->getRequest()->getParam( 'type' );
+    }
+
+    protected function getRequestValue () {
+        return $this->getRequest()->getParam( 'value' );
     }
 }

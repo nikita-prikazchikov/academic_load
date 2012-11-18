@@ -34,7 +34,7 @@ class Model_DB_User_Mapper extends Model_Abstract_DBMapper{
     public function findByFilter( Model_User_Filter $filter ){
 
    		$where = $this->getWhereClauseByFilter( $filter );
-   		$order = array(Model_DB_User_Table::FIELDS_NAME);
+   		$order = array(Model_DB_User_Table::FIELDS_NAME . " DESC");
    		return $this->fetchAll( $where, $order, $filter->getLimit(), $filter->getOffset() );
    	}
 
