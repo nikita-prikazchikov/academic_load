@@ -20,7 +20,7 @@
 
                     <div class="controls">
                         <select name="semester" class="span12">
-                        {html_options options=$filter->getSemesterAll()}
+                        {html_options options=$filter->getSemesterListAll()}
                         </select>
                     </div>
                 </div>

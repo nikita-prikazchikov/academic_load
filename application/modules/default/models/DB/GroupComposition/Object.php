@@ -20,6 +20,10 @@ class Model_DB_GroupComposition_Object extends Model_Abstract_DBObject{
         );
     }
 
+    public function save(){
+        Model_DB_GroupComposition_Mapper::get_instance()->save( $this );
+    }
+
     public function setIdYearFk ( $id_year_fk ){
         $this->_id_year_fk = $id_year_fk;
         return $this;

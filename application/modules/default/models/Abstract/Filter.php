@@ -2,6 +2,7 @@
 
 class Model_Abstract_Filter {
 
+	protected $_discipline;
 	protected $_id;
 	protected $_idApplication;
 	protected $_idSpeciality;
@@ -12,6 +13,7 @@ class Model_Abstract_Filter {
 	protected $_type;
 	protected $_active;
 	protected $_status;
+	protected $_semester;
 
 	protected $_name;
 
@@ -32,6 +34,9 @@ class Model_Abstract_Filter {
 			}
 			if ( isset( $o[ "end_date" ] ) ) {
 				$this->setEndDate( $o[ "end_date" ] );
+			}
+			if ( isset( $o[ "discipline" ] ) ) {
+				$this->setDiscipline( $o[ "discipline" ] );
 			}
 			if ( isset( $o[ "id" ] ) ) {
 				$this->setId( $o[ "id" ] );
@@ -57,9 +62,12 @@ class Model_Abstract_Filter {
 			if ( isset( $o[ "offset" ] ) ) {
 				$this->setOffset( $o[ "offset" ] );
 			}
-			if ( isset( $o[ "start_date" ] ) ) {
-				$this->setStartDate( $o[ "start_date" ] );
-			}
+            if ( isset( $o[ "semester" ] ) ) {
+                $this->setSemester( $o[ "semester" ] );
+            }
+            if ( isset( $o[ "start_date" ] ) ) {
+                $this->setStartDate( $o[ "start_date" ] );
+            }
 			if ( isset( $o[ "status" ] ) ) {
 				$this->setStatus( $o[ "status" ] );
 			}
@@ -73,11 +81,11 @@ class Model_Abstract_Filter {
 
 	// ===============================================================================================================================================
 
-    public function getSemesterAll () {
+    public function getSemesterListAll () {
         return array( "" => "Оба" ) + $this->getSemester();
     }
 
-	public function getSemester () {
+	public function getSemesterList () {
 		return array(
 			"I" => "I",
 			"II" => "II"
@@ -98,18 +106,6 @@ class Model_Abstract_Filter {
         );
     }
 
-	public function getUsers () {
-		$mapper = Model_DBMapper_UserMapper::get_instance();
-		$users = $mapper->getAssocUsers();
-		return $users;
-	}
-
-	public function getUsersAll () {
-		$users = array( "" => "All" );
-		$users += $this->getUsers();
-		return $users;
-	}
-
 	// ===============================================================================================================================================
 
 	public function setActive ( $active ) {
@@ -129,6 +125,15 @@ class Model_Abstract_Filter {
 	public function getEndDate () {
 		return $this->_end_date;
 	}
+
+    public function setDiscipline ( $discipline ) {
+        $this->_discipline = $discipline;
+        return $this;
+    }
+
+    public function getDiscipline () {
+        return $this->_discipline;
+    }
 
 	public function setId ( $id ) {
 		$this->_id = $id;
@@ -172,9 +177,6 @@ class Model_Abstract_Filter {
         return $this->_id_year;
     }
 
-
-
-
 	public function setLimit ( $limit ) {
 		$limit = $limit < 1 ? 1 : $limit;
 		$this->_limit = $limit;
@@ -192,7 +194,16 @@ class Model_Abstract_Filter {
 		return $this->_offset;
 	}
 
-	public function setStartDate ( $start_date ) {
+    public function setSemester ( $semester ) {
+        $this->_semester = $semester;
+        return $this;
+    }
+
+    public function getSemester () {
+        return $this->_semester;
+    }
+
+    public function setStartDate ( $start_date ) {
 		$this->_start_date = $start_date;
 		return $this;
 	}

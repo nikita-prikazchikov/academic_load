@@ -28,6 +28,10 @@ class Model_DB_Data_Object extends Model_Abstract_DBObject{
         );
     }
 
+    public function save(){
+        Model_DB_Data_Mapper::get_instance()->save( $this );
+    }
+
     public function setHours ( $hours ){
         $this->_hours = $hours;
         return $this;
