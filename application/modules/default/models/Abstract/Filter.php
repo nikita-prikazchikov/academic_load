@@ -2,7 +2,7 @@
 
 class Model_Abstract_Filter {
 
-	protected $_discipline;
+	protected $_idDiscipline;
 	protected $_id;
 	protected $_idApplication;
 	protected $_idSpeciality;
@@ -36,7 +36,7 @@ class Model_Abstract_Filter {
 				$this->setEndDate( $o[ "end_date" ] );
 			}
 			if ( isset( $o[ "discipline" ] ) ) {
-				$this->setDiscipline( $o[ "discipline" ] );
+				$this->setIdDiscipline( $o[ "discipline" ] );
 			}
 			if ( isset( $o[ "id" ] ) ) {
 				$this->setId( $o[ "id" ] );
@@ -126,13 +126,13 @@ class Model_Abstract_Filter {
 		return $this->_end_date;
 	}
 
-    public function setDiscipline ( $discipline ) {
-        $this->_discipline = $discipline;
+    public function setIdDiscipline ( $discipline ) {
+        $this->_idDiscipline = $discipline;
         return $this;
     }
 
-    public function getDiscipline () {
-        return $this->_discipline;
+    public function getIdDiscipline () {
+        return $this->_idDiscipline;
     }
 
 	public function setId ( $id ) {
